@@ -19,6 +19,10 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'channels',
+    'graphene_django',
+    'graphene_subscriptions',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -56,7 +60,16 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'server.wsgi.application'
+ASGI_APPLICATION = 'server.routing.application'
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
+}
 
+GRAPHENE = {
+    'SCHEMA': 'server.schema.schema'
+}
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases

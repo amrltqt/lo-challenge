@@ -4,7 +4,6 @@ import random
 
 from rx import Observable
 
-
 random.seed(42)
 
 

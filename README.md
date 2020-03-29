@@ -2,7 +2,7 @@
 
 This is a simple temperature server made of django features in combination with graphene. This has been done for a challenge that have been proposed during an interview process. 
 
-Before this challenge, I was not aware about graphql or graphene in general. It tooks some hours to adapt and understand the way it's mean to work. I was initially confident about my skills around websocket, it was worth to take a huge 
+Before this challenge, I was not aware about graphql or graphene in general. It tooks some hours to adapt and understand the way it's mean to work. I was initially confident about my skills around websocket, it was worth to take the time to refresh how it works with Django and Channels (the consumer API is really nice to use).
 
 The most challenging thing is to adapt the technology for the subscription part of the protocol as it's not necessarily well handled by the packages available actually on pypi. Most of the implementation are really recent and I spend some time in the dependency hell around subscription. The subscription part of this app is something that deserve a stronger investment in the choice of the libs to use (or to develop, seriously, I really want to try to develop my own little package following https://github.com/apollographql/subscriptions-transport-ws/blob/master/PROTOCOL.md).
 
@@ -14,6 +14,7 @@ Graphene to build the query engine is not so complex, it takes some time to unde
 - GraphQL protocol
 - Django
 - Python 
+- Docker
 
 ## Getting started
 

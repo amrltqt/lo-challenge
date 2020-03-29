@@ -17,13 +17,12 @@ Graphene to build the query engine is not so complex, it takes some time to unde
 
 ## Getting started
 
+Use docker-compose to launch the app on the port 8000, launching http://localhost:8000/graphql will gives you access to this really nice graphiql viewer configured. 
+
 ```powershell
 docker-compose build
 docker-compose up -d
 ```
-
-http://localhost:8000/graphql will gives you access to this really nice graphiql viewer configured. 
-
 
 To develop locally on this app, just clone the repo and you can start with:
 
@@ -31,6 +30,12 @@ To develop locally on this app, just clone the repo and you can start with:
 $ env\Scripts\activate
 $ pip install -r requirements.txt
 $ python .\manage.py runserver
+```
+
+To launch the test, think about building the server package in edit mode. 
+```powershell
+$ pip install -e .
+$ pytest
 ```
 
 ## Dependencies 
@@ -45,4 +50,5 @@ The best library to  https://github.com/jaydenwindle/graphene-subscriptions to b
 
 ## Docker 
 
-To deploy the app, to be frank it will be locally for test purpose, so I will not mimic all the hardening phase dedicated to the production. I chose to build a simple Dockerfile and a docker-compose.yml in order to have the django app running on the port 8000
+To deploy the app, to be frank it will be locally for test purpose, so I will not mimic all the hardening phase dedicated to the production. 
+I chose to build a simple Dockerfile and a docker-compose.yml to help reviewers to launch easily the app. 

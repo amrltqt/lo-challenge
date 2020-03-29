@@ -2,4 +2,4 @@
 .vscode
 env/
 .pytest_cache/
-.egg-info
+*.egg-info

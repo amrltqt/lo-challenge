@@ -52,3 +52,8 @@ The best library to  https://github.com/jaydenwindle/graphene-subscriptions to b
 
 To deploy the app, to be frank it will be locally for test purpose, so I will not mimic all the hardening phase dedicated to the production. 
 I chose to build a simple Dockerfile and a docker-compose.yml to help reviewers to launch easily the app. 
+
+
+## To be continued
+
+- Testing on subscription, actually I'm missing some understanding on the way Observable are served and it make me a bit confused on the best way to test it. 

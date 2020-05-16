@@ -4,10 +4,17 @@ import random
 
 from rx import Observable
 
-random.seed(42)
-
 
 class Temperature(graphene.ObjectType):
+    """ 
+    Temperature value is resolved randomly
+    value - float : a random value between 10 & 30 with one decimal (ex: 23.3)
+    timestamp - float : unix timestamp of the generation
+    unit - constant value representing the unit
+
+    Those values are generated independently and there is no relationship except
+    the interesting representation of getting them all together
+    """
     value = graphene.Float()
     timestamp = graphene.Float()
     unit = graphene.String()
@@ -23,6 +30,21 @@ class Temperature(graphene.ObjectType):
 
 
 class Query(graphene.ObjectType):
+    """ Wrap the resolution of the temperature to expose the query following the schema: 
+    An instance of this class is one of the entrypoint exposed by the schema graphene API
+    
+    ````graphql
+    query
+    {
+        currentTemperature
+        {
+            timestamp
+            value
+            unit
+        }
+    }
+    ```
+    """
     current_temperature = graphene.Field(Temperature)
 
     def resolve_current_temperature(root, info):
@@ -37,6 +59,24 @@ class TemperatureSubscription(graphene.ObjectType):
 
 
 class Subscription(graphene.ObjectType):
+    """ 
+    Subscription made available a temperature resolution at the the currentTemperatureSubscribe key.
+    ```graphql
+    subscription
+    {
+        currentTemperatureSubscribe
+        {
+            temperature
+            {
+                timestamp
+                value
+                unit
+            }
+        }
+    }
+    ```  
+    
+    """
     current_temperature_subscribe = graphene.Field(TemperatureSubscription)
 
     def resolve_current_temperature_subscribe(root, info):

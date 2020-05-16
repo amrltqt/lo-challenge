@@ -3,3 +3,5 @@
 env/
 .pytest_cache/
 *.egg-info
+db.sqlite3
+static/

@@ -69,20 +69,15 @@ subscription
 
 ## How it works
 
-The Django app serves two endpoints: 
+The Django app serves two endpoints - one for http the other for websocket: 
 
-* http://localhost:8000/graphql
-* ws://localhost:8000/ws/graphql
+* http://localhost/graphql
+* ws://localhost/ws/graphql
 
-This endpoints are served through the asgi protocol and django suggests to leverage daphne to connect to the http server you want. I didn't take the time to test it actually (https://docs.djangoproject.com/en/3.0/howto/deployment/asgi/daphne/).
 
 To stick to Django's recommandations I use a `routing.py` & a `url.py` files instead of just one routing with everything inside (leaving the responsibility to the configuration in fact) and from this route the app adress simply the schema write down into `schema.py`. This schema contains the resolvers that will be used to produce the temperature data. As it's a random value, a seed is positionned in the script (to keep same data for demo purpose) and the creation of the sample is leave to the `Temperature` class.
 
 The `setup.py` is only means to be used to build a work-in-progress package used by pytest. 
-
-I've separated the tests package from the server itself to avoid pushing tests in production in the future. 
-
-It's quite simple in fact, even if it took me several hours to make it works!
 
 ## Dependencies 
 
@@ -91,19 +86,5 @@ Graphene
 Graphene Django
 Graphene Subscription
 
-Subscription is kind of hard to handle out of the box with django
-The best library to  https://github.com/jaydenwindle/graphene-subscriptions to be challenged with this one https://github.com/graphql-python/graphql-ws 
+Subscription is not mature in the current stable graphene version so while the latest is not release, the best choice seems to be  https://github.com/jaydenwindle/graphene-subscriptions
 
-
-## Design
-
-- The responsibility of generating new data is leave to the resolvers. It's sufficient and there is no need to leverage Django models for that. 
-- The resolution is done at the Temperature field level, it could have been done upper for performance reasons. There is no question of performance so I chose to make it in the most elegant way possible (for me)
-- I didn't need a django app, I prefer stick to a simple project structure to avoid jumping on the code without added value. 
-- There is two ways to adresse the schema, one using pure http request and the second one which should leverage a websocket. In case of using a gateway to adresse the API from the outside, both of the protocol need to be opened.
-
-
-## Improvments
-
-- On the deployment part, I don't know what are the security recommandation to adress a websocket. I need to learn about that and publish a correct Nginx example. 
-- Testing on subscription, actually I'm missing some understanding on the way Observable are served and it make me a bit confused on the best way to test it. 
